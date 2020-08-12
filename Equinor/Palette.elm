@@ -345,7 +345,7 @@ highlight maybeHighlight txt =
             applyHighLight txt indexes []
 
 
-applyHighLight : String -> List ( Int, Int ) -> List (Element Msg) -> List (Element Msg)
+applyHighLight : String -> List ( Int, Int ) -> List (Element msg) -> List (Element msg)
 applyHighLight str indexes acc =
     case indexes of
         [] ->
