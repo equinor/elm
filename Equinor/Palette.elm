@@ -2,6 +2,7 @@ module Equinor.Palette exposing (alphaEnergyRed, scaled,unit,iconSize,alphaGreen
 
 
 
+
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
