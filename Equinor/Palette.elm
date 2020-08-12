@@ -1,4 +1,4 @@
-module Equinor.Palette exposing (alphaEnergyRed, scaled,unit,iconSize,alphaGreen, alphaMistBlue, alphaMossGreen, alphaMossGreenHex, kv,alphaSlateBlue, scaledInt,alphaWhite, alphaYellow, black, blue, buttonShadow, combination, darkGrey, darkGreyHex, energeticRedOnEnergeticRed8, energeticRedOnWhite, energyRed, energyRed8, green, grey, header, heritageRed, lichenGreen, lightGrey, mainMenu, mistBlue, mistBlueOnAlphaMossGreen, mistBlueOnAlphaSlate, mistBlueOnMossGreen, mistBlueOnSlate, mossGreen, mossGreenOnAlphaWhite, mossGreenOnWhite, red, redHex, slateBlue, slateBlueHex, slateBlueOnWhite, slateOnEnergeticRed8, slateOnMistBlue, spruceWood, spruceWood8, stateButton, white, whiteHex, whiteOnEnergeticRed, whiteOnGreen, whiteOnMistBlue, whiteOnMossGreen, whiteOnSlateBlue, yellow, yellowDisabled, yellowHex)
+module Equinor.Palette exposing (alphaEnergyRed, scaled,unit,iconSize,alphaGreen, alphaMistBlue, alphaMossGreen, highlight,alphaMossGreenHex, kv,alphaSlateBlue, scaledInt,alphaWhite, alphaYellow, black, blue, buttonShadow, combination, darkGrey, darkGreyHex, energeticRedOnEnergeticRed8, energeticRedOnWhite, energyRed, energyRed8, green, grey, header, heritageRed, lichenGreen, lightGrey, mainMenu, mistBlue, mistBlueOnAlphaMossGreen, mistBlueOnAlphaSlate, mistBlueOnMossGreen, mistBlueOnSlate, mossGreen, mossGreenOnAlphaWhite, mossGreenOnWhite, red, redHex, slateBlue, slateBlueHex, slateBlueOnWhite, slateOnEnergeticRed8, slateOnMistBlue, spruceWood, spruceWood8, stateButton, white, whiteHex, whiteOnEnergeticRed, whiteOnGreen, whiteOnMistBlue, whiteOnMossGreen, whiteOnSlateBlue, yellow, yellowDisabled, yellowHex)
 
 
 
@@ -298,7 +298,7 @@ unit device =
           )
 
 
-kv size header value subValue =
+kv size heading value subValue =
     let
         dontRender =
             value == ""
@@ -313,15 +313,15 @@ kv size header value subValue =
             , Font.size <| round size
 
             --, Border.dashed
-            , Border.color Palette.mistBlue
+            , Border.color mistBlue
             ]
             [ el
-                [ Font.color Palette.mossGreen
+                [ Font.color mossGreen
                 , Font.bold
                 , Font.size <| scaledInt size -3
                 , width fill
                 ]
-                (text header)
+                (text heading)
             , wrappedRow [ width fill ]
                 [ paragraph [] [ text value ]
                 , if subValue == "" then
@@ -331,3 +331,53 @@ kv size header value subValue =
                     paragraph [ Font.size <| scaledInt size -2 ] [ text subValue ]
                 ]
             ]
+
+highlight maybeHighlight txt =
+    case maybeHighlight of
+        Nothing ->
+            [ text txt ]
+
+        Just highLight ->
+            let
+                indexes =
+                    highLightIndexes txt (String.words highLight) []
+            in
+            applyHighLight txt indexes []
+
+
+applyHighLight : String -> List ( Int, Int ) -> List (Element Msg) -> List (Element Msg)
+applyHighLight str indexes acc =
+    case indexes of
+        [] ->
+            text str
+                :: acc
+                |> List.reverse
+
+        ( start, length ) :: rest ->
+            let
+                normalPart =
+                    text (String.left start str)
+
+                highlightPart =
+                    el [ Background.color (rgba 1 1 0 0.5) ] (text (String.slice start (start + length) str))
+
+                nextStr =
+                    String.dropLeft (start + length) str
+            in
+            applyHighLight nextStr rest (highlightPart :: normalPart :: acc)
+
+
+highLightIndexes : String -> List String -> List ( Int, Int ) -> List ( Int, Int )
+highLightIndexes str searchTerms acc =
+    case searchTerms of
+        [] ->
+            List.reverse acc
+
+        first :: rest ->
+            case List.head (String.indexes (String.toUpper first) (String.toUpper str)) of
+                Just index ->
+                    highLightIndexes (String.dropLeft (index + String.length first) str) rest (( index, String.length first ) :: acc)
+
+                Nothing ->
+                    acc
+
