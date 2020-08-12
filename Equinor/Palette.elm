@@ -1,4 +1,4 @@
-module Equinor.Palette exposing (alphaEnergyRed, scaled,unit,iconSize,alphaGreen, alphaMistBlue, alphaMossGreen, alphaMossGreenHex, alphaSlateBlue, scaledInt,alphaWhite, alphaYellow, black, blue, buttonShadow, combination, darkGrey, darkGreyHex, energeticRedOnEnergeticRed8, energeticRedOnWhite, energyRed, energyRed8, green, grey, header, heritageRed, lichenGreen, lightGrey, mainMenu, mistBlue, mistBlueOnAlphaMossGreen, mistBlueOnAlphaSlate, mistBlueOnMossGreen, mistBlueOnSlate, mossGreen, mossGreenOnAlphaWhite, mossGreenOnWhite, red, redHex, slateBlue, slateBlueHex, slateBlueOnWhite, slateOnEnergeticRed8, slateOnMistBlue, spruceWood, spruceWood8, stateButton, white, whiteHex, whiteOnEnergeticRed, whiteOnGreen, whiteOnMistBlue, whiteOnMossGreen, whiteOnSlateBlue, yellow, yellowDisabled, yellowHex)
+module Equinor.Palette exposing (alphaEnergyRed, scaled,unit,iconSize,alphaGreen, alphaMistBlue, alphaMossGreen, alphaMossGreenHex, kv,alphaSlateBlue, scaledInt,alphaWhite, alphaYellow, black, blue, buttonShadow, combination, darkGrey, darkGreyHex, energeticRedOnEnergeticRed8, energeticRedOnWhite, energyRed, energyRed8, green, grey, header, heritageRed, lichenGreen, lightGrey, mainMenu, mistBlue, mistBlueOnAlphaMossGreen, mistBlueOnAlphaSlate, mistBlueOnMossGreen, mistBlueOnSlate, mossGreen, mossGreenOnAlphaWhite, mossGreenOnWhite, red, redHex, slateBlue, slateBlueHex, slateBlueOnWhite, slateOnEnergeticRed8, slateOnMistBlue, spruceWood, spruceWood8, stateButton, white, whiteHex, whiteOnEnergeticRed, whiteOnGreen, whiteOnMistBlue, whiteOnMossGreen, whiteOnSlateBlue, yellow, yellowDisabled, yellowHex)
 
 
 
@@ -296,3 +296,38 @@ unit device =
             BigDesktop ->
                 16
           )
+
+
+kv size header value subValue =
+    let
+        dontRender =
+            value == ""
+    in
+    if dontRender then
+        none
+
+    else
+        column
+            [ Border.widthEach { top = 0, left = 0, right = 0, bottom = 1 }
+            , width fill
+            , Font.size <| round size
+
+            --, Border.dashed
+            , Border.color Palette.mistBlue
+            ]
+            [ el
+                [ Font.color Palette.mossGreen
+                , Font.bold
+                , Font.size <| scaledInt size -3
+                , width fill
+                ]
+                (text header)
+            , wrappedRow [ width fill ]
+                [ paragraph [] [ text value ]
+                , if subValue == "" then
+                    none
+
+                  else
+                    paragraph [ Font.size <| scaledInt size -2 ] [ text subValue ]
+                ]
+            ]
