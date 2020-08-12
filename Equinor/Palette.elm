@@ -332,15 +332,15 @@ kv size heading value subValue =
                 ]
             ]
 
-highlight maybeHighlight txt =
-    case maybeHighlight of
-        Nothing ->
+highlight textToHighlight txt =
+    if String.isEmpty textToHighlight then
+        
             [ text txt ]
 
-        Just highLight ->
+        else
             let
                 indexes =
-                    highLightIndexes txt (String.words highLight) []
+                    highLightIndexes txt (String.words textToHighlight) []
             in
             applyHighLight txt indexes []
 
