@@ -1,10 +1,12 @@
-module Palette exposing (alphaEnergyRed, alphaGreen, alphaMistBlue, alphaMossGreen, alphaMossGreenHex, alphaSlateBlue, alphaWhite, alphaYellow, black, blue, buttonShadow, combination, darkGrey, darkGreyHex, energeticRedOnEnergeticRed8, energeticRedOnWhite, energyRed, energyRed8, green, grey, header, heritageRed, lichenGreen, lightGrey, mainMenu, mistBlue, mistBlueOnAlphaMossGreen, mistBlueOnAlphaSlate, mistBlueOnMossGreen, mistBlueOnSlate, mossGreen, mossGreenOnAlphaWhite, mossGreenOnWhite, red, redHex, slateBlue, slateBlueHex, slateBlueOnWhite, slateOnEnergeticRed8, slateOnMistBlue, spruceWood, spruceWood8, stateButton, white, whiteHex, whiteOnEnergeticRed, whiteOnGreen, whiteOnMistBlue, whiteOnMossGreen, whiteOnSlateBlue, yellow, yellowDisabled, yellowHex)
+module Equinor.Palette exposing (alphaEnergyRed, scaled,unit,iconSize,alphaGreen, alphaMistBlue, alphaMossGreen, alphaMossGreenHex, alphaSlateBlue, scaledInt,alphaWhite, alphaYellow, black, blue, buttonShadow, combination, darkGrey, darkGreyHex, energeticRedOnEnergeticRed8, energeticRedOnWhite, energyRed, energyRed8, green, grey, header, heritageRed, lichenGreen, lightGrey, mainMenu, mistBlue, mistBlueOnAlphaMossGreen, mistBlueOnAlphaSlate, mistBlueOnMossGreen, mistBlueOnSlate, mossGreen, mossGreenOnAlphaWhite, mossGreenOnWhite, red, redHex, slateBlue, slateBlueHex, slateBlueOnWhite, slateOnEnergeticRed8, slateOnMistBlue, spruceWood, spruceWood8, stateButton, white, whiteHex, whiteOnEnergeticRed, whiteOnGreen, whiteOnMistBlue, whiteOnMossGreen, whiteOnSlateBlue, yellow, yellowDisabled, yellowHex)
+
+
 
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
-
+import Equinor.Device as Device exposing (DeviceDetails)
 
 
 -- Custom
@@ -260,3 +262,36 @@ darkGrey =
 
 darkGreyHex =
     "#808080"
+
+
+iconSize : Float -> Float
+iconSize size =
+    size * 3
+
+
+scaled : Float -> (Int -> Float)
+scaled size =
+    modular size 1.15
+
+
+scaledInt : Float -> (Int -> Int)
+scaledInt size =
+    scaled size >> round
+
+
+unit : DeviceDetails -> Float
+unit device =
+    Device.userScaleToFloat device.userScale
+        * (case device.class.class of
+            Phone ->
+                15
+
+            Tablet ->
+                17
+
+            Desktop ->
+                16
+
+            BigDesktop ->
+                16
+          )

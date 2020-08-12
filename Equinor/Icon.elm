@@ -1,4 +1,4 @@
-module Icon exposing (applications, arrowTop, arrow_down, arrow_left, arrow_right, arrow_up, bulletList, cable, camera, cameraFlip, circuit, curvedArrowTopLeft, document, downArrow, download, ducting, echo, echoLogo, electrical, equinorStar, error, eye, fireAndGas, flashOff, flashOn, function, heatTrace, hierarchy, instrument, junctionBox, line_, manualValve, menu, more, open_in_new, pileOfDocuments, refresh, rotate_left, rotate_right, search, settings, signal, tag, telecom, wrench, zoomIn, zoomOut)
+module Equinor.Icon exposing (applications, arrowTop, arrow_down, arrow_left, arrow_right, arrow_up, bulletList, cable, camera, cameraFlip, circuit, curvedArrowTopLeft, document, downArrow, download, ducting, echo, echoLogo, electrical, equinorStar, error, eye, fireAndGas, flashOff, flashOn, function, heatTrace, hierarchy, instrument, junctionBox, line_, manualValve, menu, more, open_in_new, pileOfDocuments, refresh, rotate_left, rotate_right, search, settings, signal, tag, telecom, wrench, zoomIn, zoomOut)
 
 import Html.Attributes as HA
 import Svg exposing (Svg, circle, g, polygon, rect, svg, text, text_)
