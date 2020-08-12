@@ -1,7 +1,9 @@
-module Component.SelectionList exposing (defaultSelectItem, loadingMessage, selectionList, webDataSelectionList)
+module Equinor.Component.SelectionList exposing (defaultSelectItem, loadingMessage, selectionList, webDataSelectionList)
 
-import Data.Common exposing (scaledInt)
-import Data.Device exposing (..)
+import Equinor.Palette as Palette exposing (scaledInt)
+import Equinor.Types exposing (WebData(..))
+
+
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -10,12 +12,10 @@ import Html as H
 import Html.Attributes as HA
 import Html.Events as HE
 import Json.Decode as D
-import Messages exposing (Msg)
-import Palette
-import Types exposing (..)
 
 
-webDataSelectionList : (a -> Element Msg) -> WebData a -> Element Msg
+
+webDataSelectionList : (a -> Element msg) -> WebData a -> Element msg
 webDataSelectionList viewFunction webData =
     case webData of
         NotLoaded ->
@@ -31,7 +31,7 @@ webDataSelectionList viewFunction webData =
             viewFunction items
 
 
-msgBox : Element Msg -> Element Msg
+msgBox : Element msg -> Element msg
 msgBox content =
     el
         [ centerX
@@ -66,7 +66,7 @@ fancySpinner =
             ]
 
 
-selectionList : (a -> ( String, Element Msg )) -> List a -> Element Msg
+selectionList : (a -> ( String, Element msg )) -> List a -> Element msg
 selectionList viewFunction items =
     Keyed.column
         [ width fill
@@ -83,7 +83,7 @@ selectionList viewFunction items =
         )
 
 
-defaultSelectItem : Float -> Msg -> Element Msg -> Element Msg
+defaultSelectItem : Float -> msg -> Element msg -> Element msg
 defaultSelectItem size msg element =
     el
         [ Background.color Palette.white
