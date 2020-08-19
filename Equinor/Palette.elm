@@ -1,13 +1,14 @@
-module Equinor.Palette exposing (alphaEnergyRed, scaled,unit,iconSize,alphaGreen, alphaMistBlue, alphaMossGreen, highlight,alphaMossGreenHex, kv,alphaSlateBlue, scaledInt,alphaWhite, alphaYellow, black, blue, buttonShadow, combination, darkGrey, darkGreyHex, energeticRedOnEnergeticRed8, energeticRedOnWhite, energyRed, energyRed8, green, grey, header, heritageRed, lichenGreen, lightGrey, mainMenu, mistBlue, mistBlueOnAlphaMossGreen, mistBlueOnAlphaSlate, mistBlueOnMossGreen, mistBlueOnSlate, mossGreen, mossGreenOnAlphaWhite, mossGreenOnWhite, red, redHex, slateBlue, slateBlueHex, slateBlueOnWhite, slateOnEnergeticRed8, slateOnMistBlue, spruceWood, spruceWood8, stateButton, white, whiteHex, whiteOnEnergeticRed, whiteOnGreen, whiteOnMistBlue, whiteOnMossGreen, whiteOnSlateBlue, yellow, yellowDisabled, yellowHex)
-
-
-
+module Equinor.Palette exposing (alphaEnergyRed, alphaGreen, alphaMistBlue, alphaMossGreen, alphaMossGreenHex, alphaSlateBlue, alphaWhite, alphaYellow, black, blue, buttonShadow, combination, darkGrey, darkGreyHex, energeticRedOnEnergeticRed8, energeticRedOnWhite, energyRed, energyRed8, green, grey, header, heritageRed, highlight, iconSize, kv, lichenGreen, lightGrey, mainMenu, mistBlue, mistBlueOnAlphaMossGreen, mistBlueOnAlphaSlate, mistBlueOnMossGreen, mistBlueOnSlate, mossGreen, mossGreenOnAlphaWhite, mossGreenOnWhite, red, redHex, scaled, scaledInt, slateBlue, slateBlueHex, slateBlueOnWhite, slateOnEnergeticRed8, slateOnMistBlue, spruceWood, spruceWood8, stateButton, toggleButton, unit, white, whiteHex, whiteOnEnergeticRed, whiteOnGreen, whiteOnMistBlue, whiteOnMossGreen, whiteOnSlateBlue, yellow, yellowDisabled, yellowHex)
 
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Equinor.Device as Device exposing (DeviceDetails)
+import Html.Attributes as HA
+import Html.Events as HE
+import Json.Decode as D
+
 
 
 -- Custom
@@ -332,17 +333,17 @@ kv size heading value subValue =
                 ]
             ]
 
+
 highlight textToHighlight txt =
     if String.isEmpty textToHighlight then
-        
-            [ text txt ]
+        [ text txt ]
 
-        else
-            let
-                indexes =
-                    highLightIndexes txt (String.words textToHighlight) []
-            in
-            applyHighLight txt indexes []
+    else
+        let
+            indexes =
+                highLightIndexes txt (String.words textToHighlight) []
+        in
+        applyHighLight txt indexes []
 
 
 applyHighLight : String -> List ( Int, Int ) -> List (Element msg) -> List (Element msg)
@@ -381,3 +382,104 @@ highLightIndexes str searchTerms acc =
                 Nothing ->
                     acc
 
+
+toggleButton : Float -> Bool -> Bool -> (Bool -> msg) -> Element msg
+toggleButton originalSize enabled active msg =
+    let
+        size =
+            originalSize * 2
+
+        circleSize =
+            size * 0.8
+    in
+    el
+        [ width (px <| round <| size * 2)
+        , height (px <| round size)
+        , Background.color <|
+            if enabled then
+                if active then
+                    green
+
+                else
+                    mistBlue
+
+            else if active then
+                lichenGreen
+
+            else
+                lightGrey
+        , Border.rounded <| round size
+        , padding <| round ((size - circleSize) / 2)
+        , if enabled then
+            pointer
+
+          else
+            htmlAttribute <| HA.classList []
+        , onClick (msg <| not active)
+        ]
+    <|
+        if active then
+            toggleButtonCircleOn circleSize
+
+        else
+            toggleButtonCircleOff circleSize
+
+
+onClick : msg -> Element.Attribute msg
+onClick msg =
+    HE.custom "click"
+        (D.succeed
+            { message = msg
+            , stopPropagation = True
+            , preventDefault = False
+            }
+        )
+        |> htmlAttribute
+
+
+toggleButtonCircle : Float -> List (Attribute msg) -> Element msg
+toggleButtonCircle size overrides =
+    el
+        ([ width (px <| round size)
+         , height (px <| round size)
+         , Background.color white
+         , Border.rounded <| round size
+         , alignRight
+         ]
+            ++ overrides
+        )
+        none
+
+
+toggleButtonCircleOff : Float -> Element msg
+toggleButtonCircleOff size =
+    toggleButtonCircle size [ alignLeft ]
+
+
+toggleButtonCircleOn : Float -> Element msg
+toggleButtonCircleOn size =
+    toggleButtonCircle size [ alignRight ]
+
+
+toggleButtonCircleMiddle : Float -> Int -> Element msg
+toggleButtonCircleMiddle size progress =
+    el
+        [ width (px <| round size)
+        , height (px <| round size)
+        , Background.color white
+        , Border.rounded <| round size
+        , centerX
+        ]
+    <|
+        el [ centerX, centerY ]
+            (if progress > 100 then
+                text "X"
+
+             else
+                row []
+                    [ el [ Font.size <| scaledInt (size / 2) -2 ] <|
+                        text <|
+                            String.fromInt progress
+                    , el [ Font.size <| scaledInt (size / 2) -4 ] (text "%")
+                    ]
+            )
