@@ -383,7 +383,8 @@ highLightIndexes str searchTerms acc =
                     acc
 
 
-toggleButton : Float -> Bool -> Bool -> (Bool -> msg) -> Element msg
+
+toggleButton : Float -> Bool -> Maybe Bool -> (Bool -> msg) -> Element msg
 toggleButton originalSize enabled active msg =
     let
         size =
@@ -397,17 +398,25 @@ toggleButton originalSize enabled active msg =
         , height (px <| round size)
         , Background.color <|
             if enabled then
-                if active then
-                    green
+                case active of 
+                    Nothing -> mistBlue 
+                    Just False -> yellow 
+                    
+                    Just True ->
+                        green
 
-                else
-                    mistBlue
+                
 
-            else if active then
-                lichenGreen
+            else 
+                case active of  
+                    Nothing -> lightGrey
+                    Just False ->
+                        alphaYellow
+                    Just True ->
 
-            else
-                lightGrey
+                        lichenGreen
+
+            
         , Border.rounded <| round size
         , padding <| round ((size - circleSize) / 2)
         , if enabled then
@@ -415,14 +424,20 @@ toggleButton originalSize enabled active msg =
 
           else
             htmlAttribute <| HA.classList []
-        , onClick (msg <| not active)
+        , onClick (msg <| case active of  
+            Just True -> False 
+            Just False -> False  
+            Nothing -> True)
         ]
     <|
-        if active then
-            toggleButtonCircleOn circleSize
-
-        else
-            toggleButtonCircleOff circleSize
+        case active of 
+            Just True ->
+                toggleButtonCircleOn circleSize
+            Just False ->
+                toggleButtonCircleMiddle circleSize 101
+            Nothing->
+        
+                toggleButtonCircleOff circleSize
 
 
 onClick : msg -> Element.Attribute msg
