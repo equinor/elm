@@ -1,4 +1,4 @@
-module Equinor.Icon exposing (applications, arrowTop, arrow_down, arrow_left, arrow_right, arrow_up, bulletList, cable, camera, check,cameraFlip, circuit, curvedArrowTopLeft, document, downArrow, download, ducting, echo, echoLogo, electrical, equinorStar, error, eye, fireAndGas, flashOff, flashOn, function, heatTrace, hierarchy, instrument, junctionBox, line_, manualValve, menu, more, open_in_new, pileOfDocuments, refresh, rotate_left, rotate_right, search, settings, signal, tag, telecom, wrench, zoomIn, zoomOut)
+module Equinor.Icon exposing (applications, arrowTop, arrow_down, arrow_left, arrow_right, arrow_up, bulletList, cable, camera, cameraFlip, check, circuit, curvedArrowTopLeft, document, downArrow, download, ducting, echo, echoLogo, electrical, equinorStar, error, eye, fireAndGas, flashOff, flashOn, folder, folder_open, function, heatTrace, hierarchy, instrument, junctionBox, line_, manualValve, menu, more, open_in_new, pileOfDocuments, refresh, rotate_left, rotate_right, search, settings, signal, tag, telecom, wrench, zoomIn, zoomOut)
 
 import Html.Attributes as HA
 import Svg exposing (Svg, circle, g, polygon, rect, svg, text, text_)
@@ -559,6 +559,8 @@ download =
         [ Svg.path [ d "M20.3,13.8a1.136,1.136,0,0,0-.8-.3h0a1.11,1.11,0,0,0-1.1,1.1v3.8H2.2V14.6a1.11,1.11,0,0,0-1.1-1.1A1.11,1.11,0,0,0,0,14.6v4.9a1.135,1.135,0,0,0,.3.8,1.135,1.135,0,0,0,.8.3H19.6a1.11,1.11,0,0,0,1.1-1.1V14.6A1.506,1.506,0,0,0,20.3,13.8Z" ] []
         , Svg.path [ d "M9.8,15l.2.2a1.09,1.09,0,0,0,1.1-.2L16,9.8a1.061,1.061,0,0,0-1.5-1.5l-3,3.2V1.1A1.11,1.11,0,0,0,10.4,0,1.135,1.135,0,0,0,9.2,1.1V11.4L6.3,8.2a2.01,2.01,0,0,0-.8-.4,1.08,1.08,0,0,0-.7.3,1.116,1.116,0,0,0-.1,1.6Z" ] []
         ]
+
+
 check =
     svg [ viewBox "0 0 24 24", fill "currentColor" ]
         [ Svg.path [ d "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" ] []
@@ -599,3 +601,13 @@ zoomOut =
     svg [ viewBox "0 0 24 24", fill "currentColor" ]
         [ Svg.path [ d "M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z" ] []
         ]
+
+
+folder =
+    svg [ viewBox "0 0 24 24", fill "currentColor" ]
+        [ Svg.path [ d "M9.17 6l2 2H20v10H4V6h5.17M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" ] [] ]
+
+
+folder_open =
+    svg [ viewBox "0 0 24 24", fill "currentColor" ]
+        [ Svg.path [ d "M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" ] [] ]
