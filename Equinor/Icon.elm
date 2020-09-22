@@ -1,4 +1,4 @@
-module Equinor.Icon exposing (applications, arrowTop, arrow_down, arrow_left, arrow_right, arrow_up, bulletList, cable, camera, cameraFlip, check, circuit, curvedArrowTopLeft, document, downArrow, download, ducting, echo, echoLogo, electrical, equinorStar, error, eye, fireAndGas, flashOff, flashOn, folder, folder_open, function, heatTrace, hierarchy, instrument, junctionBox, line_, manualValve, menu, more, open_in_new, pileOfDocuments, refresh, rotate_left, rotate_right, search, settings, signal, tag, telecom, wrench, zoomIn, zoomOut)
+module Equinor.Icon exposing (applications, arrowTop, arrow_down, arrow_left, arrow_right, arrow_up, bulletList, cable, camera, cameraFlip, check, circuit, close, curvedArrowTopLeft, document, downArrow, download, ducting, echo, echoLogo, electrical, equinorStar, error, eye, fireAndGas, flashOff, flashOn, folder, folder_open, function, heatTrace, hierarchy, instrument, junctionBox, line_, manualValve, menu, more, open_in_new, pileOfDocuments, refresh, rotate_left, rotate_right, search, settings, signal, tag, telecom, wrench, zoomIn, zoomOut)
 
 import Html.Attributes as HA
 import Svg exposing (Svg, circle, g, polygon, rect, svg, text, text_)
@@ -611,3 +611,9 @@ folder =
 folder_open =
     svg [ viewBox "0 0 24 24", fill "currentColor" ]
         [ Svg.path [ d "M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" ] [] ]
+
+
+close =
+    svg [ viewBox "0 0 24 24", fill "currentColor" ]
+        [ Svg.path [ d "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" ] []
+        ]
