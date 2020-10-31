@@ -1,16 +1,8 @@
-module Equinor.Icon exposing (applications, arrowTop, arrow_down, arrow_left,favorite, arrow_right, arrow_up, bulletList, cable, camera, cameraFlip, check, circuit, close, curvedArrowTopLeft, document, downArrow, download, ducting, echo, echoLogo, electrical, equinorStar, error, eye, fireAndGas, flashOff, flashOn, folder, folder_open, function, heatTrace, hierarchy, instrument, junctionBox, line_, manualValve, menu, more, open_in_new, pileOfDocuments, refresh, rotate_left, rotate_right, search, settings, signal, tag, telecom, wrench, zoomIn, zoomOut)
+module Equinor.Icon exposing (applications, arrowTop, arrow_down, arrow_left, arrow_right, arrow_up, bulletList, cable, camera, cameraFlip, check, circuit, close, curvedArrowTopLeft, document, downArrow, download, ducting, echo, echoLogo, electrical, equinorStar, error, eye, favorite, fireAndGas, flashOff, flashOn, folder, folder_open, function, heatTrace, hierarchy, instrument, junctionBox, keyboardArrowDown, keyboardArrowLeft, keyboardArrowRight, keyboardArrowUp, line_, manualValve, menu, more, open_in_new, pileOfDocuments, refresh, rotate_left, rotate_right, search, settings, signal, tag, telecom, windowsFolder, wrench, zoomIn, zoomOut)
 
 import Html.Attributes as HA
 import Svg exposing (Svg, circle, g, polygon, rect, svg, text, text_)
 import Svg.Attributes exposing (..)
-
-
-
-{- search =
-   svg [ viewBox "0 0 24 24", fill "currentColor" ]
-       [ Svg.path [ d "M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" ] []
-       ]
--}
 
 
 search =
@@ -618,10 +610,59 @@ close =
         [ Svg.path [ d "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" ] []
         ]
 
-favorite filled = 
+
+favorite filled =
     svg [ viewBox "0 0 24 24", fill "currentColor" ]
-        [ if filled then 
+        [ if filled then
             Svg.path [ d "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" ] []
-        else  
+
+          else
             Svg.path [ d "M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z" ] []
+        ]
+
+
+keyboardArrowRight =
+    svg [ viewBox "0 0 24 24", fill "currentColor" ]
+        [ Svg.path [ d "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" ] []
+        ]
+
+
+keyboardArrowLeft =
+    svg [ viewBox "0 0 24 24", fill "currentColor" ]
+        [ Svg.path [ d "M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" ] []
+        ]
+
+
+keyboardArrowDown =
+    svg [ viewBox "0 0 24 24", fill "currentColor" ]
+        [ Svg.path [ d "M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" ] []
+        ]
+
+
+keyboardArrowUp =
+    svg [ viewBox "0 0 24 24", fill "currentColor" ]
+        [ Svg.path [ d "M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z" ] []
+        ]
+
+
+windowsFolder =
+    svg [ viewBox "0 0 24 24" ]
+        [ Svg.rect
+            [ x "2"
+            , y "0"
+            , width "16"
+            , height "24"
+            , fill "#ffDA72"
+            , stroke "#FFB900"
+            ]
+            []
+        , Svg.rect
+            [ x "17"
+            , y "14"
+            , width "2"
+            , height "10"
+            , fill "#ffDA72"
+            , stroke "#FFB900"
+            ]
+            []
         ]
